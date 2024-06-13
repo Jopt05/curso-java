@@ -19,8 +19,15 @@ public class Mavenproject1 {
         Integer numero3 = cargarNumero();
         
         //Usando la función
-        calcularNumeroMayor(numero1, numero2, numero3);
-        calcularNumeroMenor(numero1, numero2, numero3);
+        //calcularNumeroMayor(numero1, numero2, numero3);
+        //calcularNumeroMenor(numero1, numero2, numero3);
+        Double promedio = calcularPromedio(
+                numero1,
+                numero2,
+                numero3
+        );
+        
+        System.out.println(promedio);
     }
     
     // Mira el throw
@@ -59,5 +66,10 @@ public class Mavenproject1 {
             menor = numero3;
         }
         System.out.println("El número menor es: " + menor);
+    }
+    
+    private static Double calcularPromedio(Integer numero1, Integer numero2, Integer numero3) {
+        Integer sumatoria = numero1 + numero2 + numero3;
+        return Double.valueOf(sumatoria / 3);
     }
 }
