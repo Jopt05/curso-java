@@ -42,6 +42,12 @@ public class ClientsForm extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre:");
 
+        textInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textInputKeyPressed(evt);
+            }
+        });
+
         buttonOne.setText("Guardar");
         buttonOne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +123,18 @@ public class ClientsForm extends javax.swing.JFrame {
         actualizarLista();
         JOptionPane.showMessageDialog(rootPane, "Eliminado");
     }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void textInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textInputKeyPressed
+        // TODO add your handling code here:
+        int keyText = evt.getKeyCode();
+        if( keyText == 10 ) {
+            String inputValue = this.textInput.getText();
+            clientsList.add(inputValue);
+            actualizarLista();
+            this.textInput.setText("");
+            this.textInput.requestFocus();
+        }
+    }//GEN-LAST:event_textInputKeyPressed
 
     private void actualizarLista() {
         DefaultListModel data = new DefaultListModel();
