@@ -4,6 +4,9 @@
 
 package com.mycompany.sistemagestionfull;
 
+import com.mycompany.sistemagestionfull.dao.ClienteDao;
+import com.mycompany.sistemagestionfull.forms.ClientsForm;
+
 /**
  *
  * @author Lenovo
@@ -11,7 +14,9 @@ package com.mycompany.sistemagestionfull;
 public class SistemaGestionFull {
 
     public static void main(String[] args) {
-        ClientsForm form = new ClientsForm();
+        ClienteDao database = new ClienteDao();
+        database.conectar();
+        ClientsForm form = new ClientsForm(database);
         form.show();
     }
 }
