@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.sistemagestionfull;
+package com.mycompany.sistemagestionfull.forms;
 
+import com.mycompany.sistemagestionfull.dao.ClienteDao;
+import com.mycompany.sistemagestionfull.models.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -14,12 +16,22 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class ClientsForm extends javax.swing.JFrame {
+    
+    ClienteDao dao;
+    List<Cliente> clientsList = new ArrayList<Cliente>();
 
     /**
      * Creates new form ClientsForm
+     * @param database
      */
-    public ClientsForm() {
+    public ClientsForm(ClienteDao database) {
+        dao = database;
         initComponents();
+        obtenerClientes();
+    }
+
+    private ClientsForm() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -37,6 +49,12 @@ public class ClientsForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listClients = new javax.swing.JList<>();
         deleteBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        textInput1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        textInput2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        textInput3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,22 +82,46 @@ public class ClientsForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Apellido:");
+
+        jLabel4.setText("Email:");
+
+        jLabel5.setText("Telefono:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(deleteBtn)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOne)
-                    .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(deleteBtn)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buttonOne)
+                                    .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textInput3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,6 +130,18 @@ public class ClientsForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(textInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(textInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(textInput3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonOne)
                 .addGap(78, 78, 78))
@@ -102,15 +156,21 @@ public class ClientsForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    List<String> clientsList = new ArrayList<String>();
     
     private void buttonOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOneActionPerformed
         // TODO add your handling code here:
-        String userName = this.textInput.getText();
+        // Pruebas cliente
+        Cliente client = new Cliente();
+        client.setName(this.textInput.getText());
+        client.setLastName(this.textInput1.getText());
+        client.setEmail(this.textInput2.getText());
+        client.setPhone(this.textInput3.getText());
+        
         //String[] clientsList = new String[10];
-        clientsList.add(userName);
+        clientsList.add(client);
+        dao.agregarCliente(client);
         actualizarLista();
-        this.textInput.setText("");
+        limpiarTextBoxes();
         this.textInput.requestFocus();
         // JOptionPane.showMessageDialog(rootPane, userName);
     }//GEN-LAST:event_buttonOneActionPerformed
@@ -124,6 +184,7 @@ public class ClientsForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Eliminado");
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+<<<<<<< HEAD:SistemaGestionFull/src/main/java/com/mycompany/sistemagestionfull/ClientsForm.java
     private void textInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textInputKeyPressed
         // TODO add your handling code here:
         int keyText = evt.getKeyCode();
@@ -136,11 +197,28 @@ public class ClientsForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textInputKeyPressed
 
+=======
+    private void limpiarTextBoxes() {
+       this.textInput.setText("");
+       this.textInput1.setText("");
+       this.textInput2.setText("");
+       this.textInput3.setText("");
+    }
+    
+    private void obtenerClientes() {
+        List<Cliente> clients = dao.obtenerClientes();
+        for(Cliente c: clients) {
+            clientsList.add(c);
+        }
+        actualizarLista();
+    }
+    
+>>>>>>> 41434634fdf925dbab22ceb58f366f6aee357252:SistemaGestionFull/src/main/java/com/mycompany/sistemagestionfull/forms/ClientsForm.java
     private void actualizarLista() {
         DefaultListModel data = new DefaultListModel();
         for( int x = 0; x < clientsList.size(); x++ ) {
-            String name = clientsList.get(x);
-            data.addElement(name);
+            Cliente client = clientsList.get(x);
+            data.addElement(client.getFullName());
         }
         this.listClients.setModel(data);
     }
@@ -183,8 +261,14 @@ public class ClientsForm extends javax.swing.JFrame {
     private javax.swing.JButton buttonOne;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> listClients;
     private javax.swing.JTextField textInput;
+    private javax.swing.JTextField textInput1;
+    private javax.swing.JTextField textInput2;
+    private javax.swing.JTextField textInput3;
     // End of variables declaration//GEN-END:variables
 }
