@@ -8,6 +8,7 @@ import com.mycompany.sistemagestionfull.dao.ClienteDao;
 import com.mycompany.sistemagestionfull.models.Cliente;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,7 @@ public class ClientsForm extends javax.swing.JFrame {
     
     ClienteDao dao;
     List<Cliente> clientsList = new ArrayList<Cliente>();
+    boolean isEditing = false;
 
     /**
      * Creates new form ClientsForm
@@ -55,6 +57,8 @@ public class ClientsForm extends javax.swing.JFrame {
         textInput2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         textInput3 = new javax.swing.JTextField();
+        btnEditar = new javax.swing.JButton();
+        labelOne = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +92,15 @@ public class ClientsForm extends javax.swing.JFrame {
 
         jLabel5.setText("Telefono:");
 
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        labelOne.setText("Label");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,34 +112,43 @@ public class ClientsForm extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
+                        .addComponent(textInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(deleteBtn)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 13, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(buttonOne)
-                                    .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textInput3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(textInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(textInput3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelOne)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(buttonOne)
+                                                .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEditar)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(40, 40, 40)
+                .addComponent(labelOne)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -149,7 +171,9 @@ public class ClientsForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(deleteBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteBtn)
+                    .addComponent(btnEditar))
                 .addContainerGap())
         );
 
@@ -160,15 +184,31 @@ public class ClientsForm extends javax.swing.JFrame {
     private void buttonOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOneActionPerformed
         // TODO add your handling code here:
         // Pruebas cliente
-        Cliente client = new Cliente();
-        client.setName(this.textInput.getText());
-        client.setLastName(this.textInput1.getText());
-        client.setEmail(this.textInput2.getText());
-        client.setPhone(this.textInput3.getText());
-        
+        if( isEditing ) {
+            int clientId = Integer.valueOf(this.labelOne.getText());
+            List<Cliente> clients = clientsList.stream()
+                    .filter(client -> client.getId() == clientId)
+                    .collect(Collectors.toList());
+            Cliente client = clients.get(0);
+            client.setName(this.textInput.getText());
+            client.setLastName(this.textInput1.getText());
+            client.setEmail(this.textInput2.getText());
+            client.setPhone(this.textInput3.getText());
+            clientsList.set(clientsList.indexOf(client), client);
+            dao.actualizarCliente(client);
+            isEditing = false;
+            JOptionPane.showMessageDialog(rootPane, "Actualizado");
+        } else {
+            Cliente client = new Cliente();
+            client.setName(this.textInput.getText());
+            client.setLastName(this.textInput1.getText());
+            client.setEmail(this.textInput2.getText());
+            client.setPhone(this.textInput3.getText());
+            clientsList.add(client);
+            dao.agregarCliente(client);
+            JOptionPane.showMessageDialog(rootPane, "Guardado!");
+        }
         //String[] clientsList = new String[10];
-        clientsList.add(client);
-        dao.agregarCliente(client);
         actualizarLista();
         limpiarTextBoxes();
         this.textInput.requestFocus();
@@ -178,26 +218,29 @@ public class ClientsForm extends javax.swing.JFrame {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
         int index = this.listClients.getSelectedIndex();
-        System.out.println("Index " + index);
+        Cliente client = clientsList.get(index);
+        dao.eliminarCliente(client.getId());
         clientsList.remove(index);
         actualizarLista();
         JOptionPane.showMessageDialog(rootPane, "Eliminado");
     }//GEN-LAST:event_deleteBtnActionPerformed
 
-<<<<<<< HEAD:SistemaGestionFull/src/main/java/com/mycompany/sistemagestionfull/ClientsForm.java
     private void textInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textInputKeyPressed
         // TODO add your handling code here:
-        int keyText = evt.getKeyCode();
-        if( keyText == 10 ) {
-            String inputValue = this.textInput.getText();
-            clientsList.add(inputValue);
-            actualizarLista();
-            this.textInput.setText("");
-            this.textInput.requestFocus();
-        }
     }//GEN-LAST:event_textInputKeyPressed
 
-=======
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int index = this.listClients.getSelectedIndex();
+        Cliente client = clientsList.get(index);
+        this.textInput.setText(client.getName());
+        this.textInput1.setText(client.getLastName());
+        this.textInput2.setText(client.getEmail());
+        this.textInput3.setText(client.getPhone());
+        this.labelOne.setText(String.valueOf(client.getId()));
+        isEditing = true;
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     private void limpiarTextBoxes() {
        this.textInput.setText("");
        this.textInput1.setText("");
@@ -213,7 +256,6 @@ public class ClientsForm extends javax.swing.JFrame {
         actualizarLista();
     }
     
->>>>>>> 41434634fdf925dbab22ceb58f366f6aee357252:SistemaGestionFull/src/main/java/com/mycompany/sistemagestionfull/forms/ClientsForm.java
     private void actualizarLista() {
         DefaultListModel data = new DefaultListModel();
         for( int x = 0; x < clientsList.size(); x++ ) {
@@ -258,6 +300,7 @@ public class ClientsForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton buttonOne;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel2;
@@ -265,6 +308,7 @@ public class ClientsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelOne;
     private javax.swing.JList<String> listClients;
     private javax.swing.JTextField textInput;
     private javax.swing.JTextField textInput1;

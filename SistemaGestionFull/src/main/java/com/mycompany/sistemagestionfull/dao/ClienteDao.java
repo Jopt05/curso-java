@@ -77,4 +77,29 @@ public class ClienteDao {
         
         return clientsList;
     }
+    
+    public void eliminarCliente(int id) {
+        try {
+            String sqlQuery = "DELETE FROM `clientes` WHERE id="+ id +";";
+            Statement statement = conexion.createStatement();
+            statement.execute(sqlQuery);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void actualizarCliente(Cliente client) {
+        try {
+            String sqlQuery = "UPDATE `clientes` " +
+                    "SET name='"+ client.getName() +"', " +
+                    "lastname='"+ client.getLastName() +"', " +
+                    "email='"+ client.getEmail() +"', " +
+                    "phone='"+ client.getPhone() +"' " +
+                    "WHERE id='"+ client.getId() +"';";
+            Statement statement = conexion.createStatement();
+            statement.execute(sqlQuery);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
