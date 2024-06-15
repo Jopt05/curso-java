@@ -197,6 +197,8 @@ public class ClientsForm extends javax.swing.JFrame {
             clientsList.set(clientsList.indexOf(client), client);
             dao.actualizarCliente(client);
             isEditing = false;
+            this.labelOne.setText("");
+            this.buttonOne.setText("Guardar");
             JOptionPane.showMessageDialog(rootPane, "Actualizado");
         } else {
             Cliente client = new Cliente();
@@ -238,6 +240,7 @@ public class ClientsForm extends javax.swing.JFrame {
         this.textInput2.setText(client.getEmail());
         this.textInput3.setText(client.getPhone());
         this.labelOne.setText(String.valueOf(client.getId()));
+        this.buttonOne.setText("Actualizar");
         isEditing = true;
     }//GEN-LAST:event_btnEditarActionPerformed
 
