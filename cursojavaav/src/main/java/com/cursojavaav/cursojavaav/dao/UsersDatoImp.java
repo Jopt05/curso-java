@@ -35,5 +35,11 @@ public class UsersDatoImp implements UserDao {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
+
+    @Override
+    public User createUser(User user) {
+        entityManager.merge(user);
+        return user;
+    }
     
 }
