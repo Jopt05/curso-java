@@ -20,6 +20,6 @@ public interface UserDao {
 
     User createUser(User user);
     
-    User getUserByCredentials(User user);
+    User getUserByCredentials(String email, String password);
     
 }

@@ -53,12 +53,12 @@ public class UsersDatoImp implements UserDao {
     }
 
     @Override
-    public User getUserByCredentials(User user) {
+    public User getUserByCredentials(String email, String password) {
         //Al hacer éste ejercicio de reemplazar parámetros
         //evitamos inyección de SQL
         String query = "FROM User WHERE email = :email";
         List<User> usersList = entityManager.createQuery(query)
-                .setParameter("email", user.getEmail())
+                .setParameter("email", email)
                 .getResultList();
         
         if( usersList.isEmpty() ) {
@@ -68,7 +68,7 @@ public class UsersDatoImp implements UserDao {
         String passwordHashed = usersList.get(0).getPassword();
         
         Argon2 argonClient = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-        boolean isCorrect = argonClient.verify(passwordHashed, user.getPassword());
+        boolean isCorrect = argonClient.verify(passwordHashed, password);
         
         if( isCorrect ) {
             return usersList.get(0);

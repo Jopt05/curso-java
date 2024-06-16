@@ -5,8 +5,10 @@
 package com.cursojavaav.cursojavaav.controllers;
 
 import com.cursojavaav.cursojavaav.dao.UserDao;
+import com.cursojavaav.cursojavaav.dtos.LoginDto;
 import com.cursojavaav.cursojavaav.models.User;
 import com.cursojavaav.cursojavaav.utils.JWTUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,11 @@ public class AuthController {
     private JWTUtil jwtUtil;
     
     @RequestMapping(value = "api/login", method = RequestMethod.POST)
-    public String login(@RequestBody User user) {
-        User loggedUser = userDao.getUserByCredentials(user);
+    public String login(@Valid @RequestBody LoginDto loginDto) {
+        User loggedUser = userDao.getUserByCredentials(
+                loginDto.email,
+                loginDto.password
+        );
         if( loggedUser != null ) {
             String token = jwtUtil.create(String.valueOf(loggedUser.getId()), loggedUser.getEmail());
             return token;
