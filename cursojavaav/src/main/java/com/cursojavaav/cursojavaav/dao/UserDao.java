@@ -20,6 +20,6 @@ public interface UserDao {
 
     User createUser(User user);
     
-    boolean verifyAuth(User user); 
+    User getUserByCredentials(User user);
     
 }
